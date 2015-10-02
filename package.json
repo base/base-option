@@ -1,7 +1,7 @@
 {
   "name": "base-options",
   "description": "Adds an `option` method to base-methods.",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "homepage": "https://github.com/jonschlinkert/base-options",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/base-options",
@@ -20,15 +20,27 @@
     "test": "mocha"
   },
   "dependencies": {
-    "base-methods": "^0.2.10"
+    "base-methods": "^0.2.10",
+    "get-value": "^1.2.1",
+    "lazy-cache": "^0.2.3",
+    "set-value": "^0.2.0"
   },
   "devDependencies": {
     "mocha": "*"
   },
-  "keywords": [],
+  "keywords": [
+    "app",
+    "base",
+    "base-methods",
+    "data",
+    "extend",
+    "merge",
+    "methods"
+  ],
   "verb": {
     "related": {
       "list": [
+        "base-data",
         "base-methods",
         "class-utils"
       ]
