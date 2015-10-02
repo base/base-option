@@ -34,6 +34,7 @@ console.log(app.options);
 
 ## Related projects
 
+* [base-data](https://www.npmjs.com/package/base-data): adds a `data` method to base-methods. | [homepage](https://github.com/jonschlinkert/base-data)
 * [base-methods](https://www.npmjs.com/package/base-methods): Starter for creating a node.js application with a handful of common methods, like `set`, `get`,… [more](https://www.npmjs.com/package/base-methods) | [homepage](https://github.com/jonschlinkert/base-methods)
 * [class-utils](https://www.npmjs.com/package/class-utils): Utils for working with JavaScript classes and prototype methods. | [homepage](https://github.com/jonschlinkert/class-utils)
 
