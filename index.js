@@ -9,22 +9,24 @@
 
 var utils = require('./utils');
 
-module.exports = function(key, value) {
-  this.options = this.options || {};
+module.exports = function option(app) {
+  app.mixin('option', function(key, value) {
+    this.options = this.options || {};
 
-  if (typeof key === 'string') {
-    if (arguments.length === 1) {
-      return utils.get(this.options, key);
+    if (typeof key === 'string') {
+      if (arguments.length === 1) {
+        return utils.get(this.options, key);
+      }
+      utils.set(this.options, key, value);
+      this.emit('option', key, value);
+      return this;
     }
-    utils.set(this.options, key, value);
-    this.emit('option', key, value);
+
+    if (key == null || typeof key !== 'object') {
+      throw new TypeError('expected a string or object.');
+    }
+
+    this.visit('option', key);
     return this;
-  }
-
-  if (typeof key !== 'object') {
-    throw new TypeError('expected a string or object.');
-  }
-
-  this.visit('option', key);
-  return this;
+  });
 };
