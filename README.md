@@ -1,4 +1,4 @@
-# base-options [![NPM version](https://badge.fury.io/js/base-options.svg)](http://badge.fury.io/js/base-options)
+# base-options [![NPM version](https://badge.fury.io/js/base-options.svg)](http://badge.fury.io/js/base-options)  [![Build Status](https://travis-ci.org/jonschlinkert/base-options.svg)](https://travis-ci.org/jonschlinkert/base-options)
 
 > Adds an `option` method to base-methods.
 
