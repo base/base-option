@@ -1,10 +1,3 @@
-/*!
- * base-options <https://github.com/jonschlinkert/base-options>
- *
- * Copyright (c) 2015 .
- * Licensed under the MIT license.
- */
-
 'use strict';
 
 require('mocha');
