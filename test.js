@@ -13,53 +13,78 @@ describe('option', function () {
     };
     Base.extend(App);
     app = new App();
+    app.use(options);
   });
 
   it('should add the option method to the `app` prototype:', function () {
-    app.use(options);
     assert.equal(typeof App.prototype.option, 'function');
   });
 
-  it('should set options', function () {
-    app.use(options);
+  it('should set options as key-value pairs', function () {
     app.option('a', 'b');
     assert.equal(app.options.a, 'b');
   });
 
-  it('should get options', function () {
-    app.use(options);
-    app.option('a', 'b');
-    var a = app.option('a');
-    assert.equal(a, 'b');
-  });
-
   it('should set an object', function () {
-    app.use(options);
     app.option({c: 'd'});
     var c = app.option('c');
     assert.equal(c, 'd');
   });
 
-  it('should throw an error when key is falsey', function (done) {
+  it('should get options', function () {
+    app.option('a', 'b');
+    var a = app.option('a');
+    assert.equal(a, 'b');
+  });
+
+  it('should return true if an option exists', function () {
+    app.option('a', 'b');
+    assert(app.hasOption('a'));
+  });
+
+  it('should enable an option', function () {
+    assert(!app.options.a);
+    app.enable('a');
+    assert(app.options.a);
+  });
+
+  it('should disable an option', function () {
+    app.enable('a');
+    assert(app.options.a);
+    app.disable('a');
+    assert(!app.options.a);
+  });
+
+  it('should set nested options', function () {
+    app.option('a.b.c', 'd');
+    assert.deepEqual(app.options.a, {b: {c: 'd'}});
+  });
+
+  it('should get nested options', function () {
+    app.option('a.b.c', 'd');
+    assert.deepEqual(app.option('a'), {b: {c: 'd'}});
+    assert.deepEqual(app.option('a.b'), {c: 'd'});
+    assert.deepEqual(app.option('a.b.c'), 'd');
+  });
+
+  it('should throw an error when key is null', function (done) {
     try {
-      app.use(options);
       app.option(null);
       done(new Error('expected an error'));
     } catch(err) {
       assert(err);
-      assert(err.message === 'expected a string or object.');
+      assert(err.message === 'expected option to be a string, object or array');
       done();
     }
   });
 
   it('should throw an error when key is not a string or object', function (done) {
     try {
-      app.use(options);
       app.option(9);
       done(new Error('expected an error'));
     } catch(err) {
       assert(err);
-      assert(err.message === 'expected a string or object.');
+      assert(err.message === 'expected option to be a string, object or array');
       done();
     }
   });
