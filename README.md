@@ -1,6 +1,6 @@
 # base-options [![NPM version](https://badge.fury.io/js/base-options.svg)](http://badge.fury.io/js/base-options)  [![Build Status](https://travis-ci.org/jonschlinkert/base-options.svg)](https://travis-ci.org/jonschlinkert/base-options)
 
-> Adds an `option` method to base-methods.
+> Adds a few options methods to base-methods, like `option`, `enable` and `disable`. See the readme for the full API.
 
 ## Install
 

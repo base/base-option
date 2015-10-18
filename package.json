@@ -1,6 +1,6 @@
 {
   "name": "base-options",
-  "description": "Adds an `option` method to base-methods.",
+  "description": "Adds a few options methods to base-methods, like `option`, `enable` and `disable`. See the readme for the full API.",
   "version": "0.3.0",
   "homepage": "https://github.com/jonschlinkert/base-options",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
@@ -10,8 +10,7 @@
   },
   "license": "MIT",
   "files": [
-    "index.js",
-    "utils.js"
+    "index.js"
   ],
   "main": "index.js",
   "engines": {
@@ -21,9 +20,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "get-value": "^1.2.1",
-    "lazy-cache": "^0.2.3",
-    "set-value": "^0.2.0"
+    "option-cache": "^3.0.0"
   },
   "devDependencies": {
     "base-methods": "^0.2.11",
