@@ -9,11 +9,8 @@
 
 
 module.exports = function option(app) {
-  if (typeof app.option === 'function') {
-    return option;
-  }
-
   var Options = require('option-cache');
+
   this.options = this.options || {};
   Options.call(this, this.options);
 
