@@ -7,13 +7,16 @@
 
 'use strict';
 
+
 module.exports = function option(app) {
-  var Options = require('option-cache');
-
-  this.options = this.options || {};
-  Options.call(this);
-
-  for (var key in Options.prototype) {
-    app.mixin(key, Options.prototype[key]);
+  if (typeof app.option === 'function') {
+    return option;
   }
+
+  var Options = require('option-cache');
+  this.options = this.options || {};
+  Options.call(this, this.options);
+
+  this.visit('mixin', Options.prototype);
+  return option;
 };
