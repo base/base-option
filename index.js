@@ -14,6 +14,6 @@ module.exports = function option(app) {
   this.options = this.options || {};
   Options.call(this, this.options);
 
-  this.visit('mixin', Options.prototype);
+  this.visit('define', Options.prototype);
   return option;
 };

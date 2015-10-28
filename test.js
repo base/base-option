@@ -16,8 +16,16 @@ describe('option', function () {
     app.use(options);
   });
 
-  it('should add the option method to the `app` prototype:', function () {
-    assert.equal(typeof App.prototype.option, 'function');
+  describe('method', function () {
+    it('should add the option method to the `app` instance:', function () {
+      app.use(options);
+      assert.equal(typeof app.option, 'function');
+    });
+
+    it('should not add the option method to the `Base` prototype:', function () {
+      app.use(options);
+      assert.notEqual(typeof Base.prototype.option, 'function');
+    });
   });
 
   it('should set options as key-value pairs', function () {
