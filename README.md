@@ -19,7 +19,7 @@ var Base = require('base-methods');
 var options = require('base-options');
 
 var base = new Base();
-base.use(options); // plugin
+base.use(options()); // plugin
 
 // set an option
 app.option('a', 'b');
