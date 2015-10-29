@@ -7,13 +7,14 @@
 
 'use strict';
 
-
-module.exports = function option(app) {
+module.exports = function(options) {
   var Options = require('option-cache');
+  var extend = require('extend-shallow');
 
-  this.options = this.options || {};
-  Options.call(this, this.options);
-
-  this.visit('define', Options.prototype);
-  return option;
+  return function fn(app) {
+    this.options = extend({}, options, this.options, {});
+    Options.call(this, this.options);
+    this.visit('define', Options.prototype);
+    return fn;
+  };
 };
