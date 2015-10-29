@@ -1,7 +1,7 @@
 {
   "name": "base-options",
   "description": "Adds a few options methods to base-methods, like `option`, `enable` and `disable`. See the readme for the full API.",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "homepage": "https://github.com/jonschlinkert/base-options",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/base-options",
@@ -20,6 +20,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "extend-shallow": "^2.0.1",
     "option-cache": "^3.0.0"
   },
   "devDependencies": {
