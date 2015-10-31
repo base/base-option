@@ -3,6 +3,7 @@
 require('mocha');
 var assert = require('assert');
 var Base = require('base-methods');
+var plugins = require('base-plugins');
 var options = require('./');
 var app;
 
@@ -14,12 +15,10 @@ describe('option', function () {
 
   describe('method', function () {
     it('should add the option method to the `app` instance:', function () {
-      app.use(options());
       assert.equal(typeof app.option, 'function');
     });
 
     it('should not add the option method to the `Base` prototype:', function () {
-      app.use(options());
       assert.notEqual(typeof Base.prototype.option, 'function');
     });
   });
@@ -28,6 +27,18 @@ describe('option', function () {
     it('should add options passed to the plugin', function () {
       app.use(options({z: 'y'}));
       assert.equal(app.options.z, 'y');
+    });
+
+    it('should pass the plugin to "run" when the `plugins` plugin is used', function () {
+      app.use(plugins());
+      app.use(options());
+      assert(app.fns.length === 1);
+    });
+
+    it('should pass the plugin to "run" when {run:false} is defined', function () {
+      app.use(plugins());
+      app.use(options({run: false}));
+      assert(app.fns.length === 0);
     });
 
     it('should not overwrite existing options', function () {
