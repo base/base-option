@@ -7,19 +7,18 @@
 
 'use strict';
 
-var Options = require('option-cache');
-var extend = require('extend-shallow');
-
 module.exports = function(options) {
+  var Options = require('option-cache');
+  var extend = require('extend-shallow');
+
   // shallow clone options
   var opts = extend({}, options);
 
   return function fn(app) {
     // original constructor reference
     var ctor = this.constructor;
+    Options.call(this, extend(this.options, opts));
 
-    this.options = extend({}, opts, this.options);
-    Options.call(this, this.options);
     this.visit('define', Options.prototype);
 
     // restore original constructor
