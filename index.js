@@ -15,6 +15,8 @@ module.exports = function(options) {
   var opts = extend({}, options);
 
   return function fn(app) {
+    if (this.isRegistered('base-options')) return;
+
     // original constructor reference
     var ctor = this.constructor;
     Options.call(this, extend(this.options, opts));

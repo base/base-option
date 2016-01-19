@@ -25,11 +25,13 @@ describe('option', function() {
 
   describe('plugin', function() {
     it('should add options passed to the plugin', function() {
+      app = new Base();
       app.use(options({z: 'y'}));
       assert.equal(app.options.z, 'y');
     });
 
     it('should pass the plugin to "run" when the `plugins` plugin is used', function() {
+      app = new Base();
       app.use(plugins());
       app.use(options());
       assert(app.fns.length === 1);
