@@ -1,8 +1,8 @@
 'use strict';
 
 require('mocha');
+var Base = require('base');
 var assert = require('assert');
-var Base = require('base-methods');
 var plugins = require('base-plugins');
 var options = require('./');
 var app;
