@@ -1,5 +1,5 @@
 /*!
- * base-options <https://github.com/jonschlinkert/base-options>
+ * base-option <https://github.com/node-base/base-option>
  *
  * Copyright (c) 2015, Jon Schlinkert.
  * Licensed under the MIT License.
@@ -15,7 +15,7 @@ module.exports = function(options) {
   var opts = extend({}, options);
 
   return function fn(app) {
-    if (this.isRegistered('base-options')) return;
+    if (this.isRegistered('base-option')) return;
 
     // original constructor reference
     var ctor = this.constructor;
