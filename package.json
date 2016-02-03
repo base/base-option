@@ -2,7 +2,7 @@
   "name": "base-options",
   "description": "Adds a few options methods to base-methods, like `option`, `enable` and `disable`. See the readme for the full API.",
   "deprecated": "`base-options` has been deprecated and renamed to `base-option`. See https://github.com/node-base/base-option",
-  "version": "0.5.5",
+  "version": "0.6.0",
   "homepage": "https://github.com/jonschlinkert/base-options",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/base-options",
