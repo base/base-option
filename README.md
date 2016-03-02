@@ -3,10 +3,11 @@
 > Adds a few options methods to base, like `option`, `enable` and `disable`. See the readme for the full API.
 
 ## Install
+
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm i base-option --save
+$ npm install base-option --save
 ```
 
 ## Usage
@@ -33,15 +34,15 @@ console.log(app.option('x'));
 
 ## API
 
-### [.option](index.js#L53)
+### .option
 
 Set or get an option.
 
 **Params**
 
 * `key` **{String}**: The option name.
-* `value` **{*}**: The value to set.
-* `returns` **{*}**: Returns a `value` when only `key` is defined.
+* `value` **{any}**: The value to set.
+* `returns` **{any}**: Returns a `value` when only `key` is defined.
 
 **Example**
 
@@ -51,7 +52,7 @@ app.option('a');
 //=> true
 ```
 
-### [.hasOption](index.js#L96)
+### .hasOption
 
 Return true if `options.hasOwnProperty(key)`
 
@@ -70,7 +71,7 @@ app.hasOption('a');
 //=> true
 ```
 
-### [.enable](index.js#L114)
+### .enable
 
 Enable `key`.
 
@@ -85,7 +86,7 @@ Enable `key`.
 app.enable('a');
 ```
 
-### [.disable](index.js#L131)
+### .disable
 
 Disable `key`.
 
@@ -100,7 +101,7 @@ Disable `key`.
 app.disable('a');
 ```
 
-### [.enabled](index.js#L153)
+### .enabled
 
 Check if `prop` is enabled (truthy).
 
@@ -120,7 +121,7 @@ app.enabled('a');
 //=> true
 ```
 
-### [.disabled](index.js#L174)
+### .disabled
 
 Check if `prop` is disabled (falsey).
 
@@ -140,7 +141,7 @@ app.disabled('a');
 //=> false
 ```
 
-### [.isTrue](index.js#L200)
+### .isTrue
 
 Returns true if the value of `prop` is strictly `true`.
 
@@ -165,7 +166,7 @@ app.isTrue('a.b.c');
 //=> true
 ```
 
-### [.isFalse](index.js#L226)
+### .isFalse
 
 Returns true if the value of `key` is strictly `false`.
 
@@ -190,7 +191,7 @@ app.isFalse('a.b.c');
 //=> true
 ```
 
-### [.isBoolean](index.js#L249)
+### .isBoolean
 
 Return true if the value of key is either `true` or `false`.
 
@@ -211,43 +212,100 @@ app.isBoolean('c');
 //=> true
 ```
 
+### [.option.set](index.js#L43)
+
+Set option `key` on `app.options` with the given `value`
+
+**Params**
+
+* `key` **{String}**: Option key, dot-notation may be used.
+* `value` **{any}**
+
+**Example**
+
+```js
+app.option.set('a', 'b');
+console.log(app.option.get('a'));
+//=> 'b'
+```
+
+### [.option.get](index.js#L62)
+
+Get option `key` from `app.options`
+
+**Params**
+
+* `key` **{String}**: Option key, dot-notation may be used.
+* `returns` **{any}**
+
+**Example**
+
+```js
+app.option({a: 'b'});
+console.log(app.option.get('a'));
+//=> 'b'
+```
+
+### [.option.create](index.js#L80)
+
+Returns a shallow clone of `app.options` with all of the options methods, as well as a `.merge` method for merging options onto the cloned object.
+
+**Params**
+
+* `options` **{Options}**: Object to merge onto the returned options object.
+* `returns` **{Object}**
+
+**Example**
+
+```js
+var opts = app.option.create();
+opts.merge({foo: 'bar'});
+```
 
 ## Related projects
+
 * [base-data](https://www.npmjs.com/package/base-data): adds a `data` method to base-methods. | [homepage](https://github.com/jonschlinkert/base-data)
 * [base-methods](https://www.npmjs.com/package/base-methods): base-methods is the foundation for creating modular, unit testable and highly pluggable node.js applications, starting… [more](https://www.npmjs.com/package/base-methods) | [homepage](https://github.com/jonschlinkert/base-methods)
-* [class-utils](https://www.npmjs.com/package/class-utils): Utils for working with JavaScript classes and prototype methods. | [homepage](https://github.com/jonschlinkert/class-utils)  
+* [class-utils](https://www.npmjs.com/package/class-utils): Utils for working with JavaScript classes and prototype methods. | [homepage](https://github.com/jonschlinkert/class-utils)
+
+## Contributing
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/base-option/issues/new).
+
+## Building docs
+
+Generate readme and API documentation with [verb](https://github.com/verbose/verb):
+
+```sh
+$ npm install verb && npm run docs
+```
+
+Or, if [verb](https://github.com/verbose/verb) is installed globally:
+
+```sh
+$ verb
+```
 
 ## Running tests
+
 Install dev dependencies:
 
 ```sh
-$ npm i -d && npm test
+$ npm install -d && npm test
 ```
-
-## Coverage
-
-As of February 03, 2016
-
-```sh
-Statements  : 100% (6/6)
-Branches    : 100% (2/2)
-Functions   : 100% (1/1)
-Lines       : 100% (6/6)
-```
-
-## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/jonschlinkert/base-option/issues/new).
 
 ## Author
+
 **Jon Schlinkert**
 
-+ [github/jonschlinkert](https://github.com/jonschlinkert)
-+ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
+* [github/jonschlinkert](https://github.com/jonschlinkert)
+* [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
 ## License
+
 Copyright © 2016 [Jon Schlinkert](https://github.com/jonschlinkert)
-Released under the MIT license.
+Released under the [MIT license](https://github.com/node-base/base-option/blob/master/LICENSE).
 
 ***
 
-_This file was generated by [verb](https://github.com/verbose/verb) on February 03, 2016._
+_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on March 02, 2016._
