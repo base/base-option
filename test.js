@@ -120,4 +120,58 @@ describe('option', function() {
       }
     });
   });
+
+  describe('option.set', function() {
+    beforeEach(function() {
+      app = new Base();
+      app.use(options());
+    });
+
+    it('should set a key-value pair on app.options', function() {
+      app.option.set('a', 'b');
+      app.option.set('c', 'd');
+      assert.equal(app.options.a, 'b');
+      assert.equal(app.options.c, 'd');
+    });
+  });
+
+  describe('option.get', function() {
+    beforeEach(function() {
+      app = new Base();
+      app.use(options());
+    });
+
+    it('should get a key-value pair from app.options', function() {
+      app.option.set('a', 'b');
+      app.option.set('c', 'd');
+      assert.equal(app.option.get('a'), 'b');
+      assert.equal(app.option.get('c'), 'd');
+    });
+  });
+
+  describe('option.create', function() {
+    beforeEach(function() {
+      app = new Base();
+      app.use(options());
+    });
+
+    it('should clone options', function() {
+      app.option({a: 'b', c: 'd'});
+      var opts = app.option.create();
+      app.option({e: 'f'});
+      assert.equal(opts.options.a, 'b');
+      assert.equal(opts.options.c, 'd');
+      assert.equal(typeof opts.options.e, 'undefined');
+    });
+
+    it('should expose a merge method', function() {
+      app.option({a: 'b', c: 'd'});
+      var opts = app.option.create();
+      opts.merge({e: 'f'}, {g: 'h'});
+      assert.equal(opts.options.a, 'b');
+      assert.equal(opts.options.c, 'd');
+      assert.equal(opts.options.e, 'f');
+      assert.equal(opts.options.g, 'h');
+    });
+  });
 });
