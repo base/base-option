@@ -159,19 +159,45 @@ describe('option', function() {
       app.option({a: 'b', c: 'd'});
       var opts = app.option.create();
       app.option({e: 'f'});
-      assert.equal(opts.options.a, 'b');
-      assert.equal(opts.options.c, 'd');
-      assert.equal(typeof opts.options.e, 'undefined');
+      assert.equal(opts.a, 'b');
+      assert.equal(opts.c, 'd');
+      assert.equal(typeof opts.e, 'undefined');
+    });
+
+    it('should expose a set method', function() {
+      app.option({a: 'b', c: 'd'});
+      var opts = app.option.create();
+
+      opts.set('e', 'f');
+      opts.set('g', 'h');
+      assert.equal(opts.a, 'b');
+      assert.equal(opts.c, 'd');
+      assert.equal(opts.e, 'f');
+      assert.equal(opts.g, 'h');
+    });
+
+    it('should expose a get method', function() {
+      app.option({a: 'b', c: 'd'});
+      var opts = app.option.create();
+
+      opts.set('e', 'f');
+      opts.set('g', 'h');
+
+      assert.equal(opts.get('a'), 'b');
+      assert.equal(opts.get('c'), 'd');
+      assert.equal(opts.get('e'), 'f');
+      assert.equal(opts.get('g'), 'h');
     });
 
     it('should expose a merge method', function() {
       app.option({a: 'b', c: 'd'});
       var opts = app.option.create();
+
       opts.merge({e: 'f'}, {g: 'h'});
-      assert.equal(opts.options.a, 'b');
-      assert.equal(opts.options.c, 'd');
-      assert.equal(opts.options.e, 'f');
-      assert.equal(opts.options.g, 'h');
+      assert.equal(opts.a, 'b');
+      assert.equal(opts.c, 'd');
+      assert.equal(opts.e, 'f');
+      assert.equal(opts.g, 'h');
     });
   });
 });

@@ -12,20 +12,22 @@ var utils = require('./utils');
 module.exports = function(options) {
   return function fn(app) {
     if (this.isRegistered('base-options')) return;
+
     var Options = utils.Options;
     var define = utils.define;
     var set = utils.set;
     var get = utils.get;
 
-    // shallow clone options
-    var opts = utils.merge({}, options);
-    var self = this;
-
     // original constructor reference
     var ctor = this.constructor;
-    Options.call(this, utils.merge(this.options, opts));
+    Options.call(this, utils.merge(this.options, options));
+
+    /**
+     * Mixin `Options.prototype` methods
+     */
 
     this.visit('define', Options.prototype);
+    var opts = this.options;
 
     /**
      * Set option `key` on `app.options` with the given `value`
@@ -41,8 +43,8 @@ module.exports = function(options) {
      */
 
     define(this.option, 'set', function(key, val) {
-      set(self.options, key, val);
-      return self.options;
+      set(opts, key, val);
+      return opts;
     });
 
     /**
@@ -60,7 +62,7 @@ module.exports = function(options) {
      */
 
     define(this.option, 'get', function(key) {
-      return get(self.options, key);
+      return get(opts, key);
     });
 
     /**
@@ -78,22 +80,32 @@ module.exports = function(options) {
      */
 
     define(this.option, 'create', function(options) {
-      var opts = new Options(utils.merge({}, self.options));
-      define(opts, 'merge', opts.option.bind(opts));
-      define(opts, '_callbacks', opts._callbacks);
+      var inst = new Options(utils.merge({}, opts));
       if (options) {
-        opts.merge.apply(opts, arguments);
+        inst.option.apply(inst, arguments);
       }
-      return opts;
+
+      define(inst.options, 'set', function(key, val) {
+        set(this, key, val);
+        return this;
+      });
+
+      define(inst.options, 'get', function(key) {
+        return get(this, key);
+      });
+
+      define(inst.options, 'merge', function() {
+        var args = [].concat.apply([], [].slice.call(arguments));
+        args.unshift(this);
+        return utils.merge.apply(utils.merge, args);
+      });
+
+      define(inst, '_callbacks', inst._callbacks);
+      return inst.options;
     });
 
     // restore original constructor
-    this.constructor = ctor;
-
-    // prevent the plugin from
-    //  being passed to `run`
-    if (opts.run !== false) {
-      return fn;
-    }
+    define(this, 'constructor', ctor);
+    return fn;
   };
 };
