@@ -1,7 +1,7 @@
 {
   "name": "base-option",
   "description": "Adds a few options methods to base, like `option`, `enable` and `disable`. See the readme for the full API.",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "homepage": "https://github.com/node-base/base-option",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "node-base/base-option",
