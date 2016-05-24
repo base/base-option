@@ -26,7 +26,7 @@ utils.isValid = function(app) {
     return false;
   }
 
-  if (typeof app.get !== 'function' && typeof app.set !== 'function') {
+  if (typeof app.option === 'function') {
     return false;
   }
 
