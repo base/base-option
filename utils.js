@@ -1,18 +1,35 @@
 'use strict';
 
+var utils = require('lazy-cache')(require);
+var fn = require;
+require = utils;
+
 /**
  * Module dependencies
  */
 
-var utils = require('lazy-cache')(require);
-var fn = require;
-require = utils;
-require('option-cache', 'Options');
 require('define-property', 'define');
-require('mixin-deep', 'merge');
 require('get-value', 'get');
+require('is-registered');
+require('is-valid-instance');
+require('mixin-deep', 'merge');
+require('option-cache', 'Options');
 require('set-value', 'set');
 require = fn;
+
+/**
+ * Return true if app is a valid instance
+ */
+
+utils.isValid = function(app, types) {
+  if (!utils.isValidInstance(app, types || ['app', 'views', 'collection', 'list'])) {
+    return false;
+  }
+  if (utils.isRegistered(app, 'base-option')) {
+    return false;
+  }
+  return true;
+};
 
 /**
  * Expose `utils` modules

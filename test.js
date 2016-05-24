@@ -7,6 +7,10 @@ var plugins = require('base-plugins');
 var options = require('./');
 var app;
 
+Base.use(function() {
+  this.isApp = true;
+});
+
 describe('option', function() {
   beforeEach(function() {
     app = new Base();

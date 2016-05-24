@@ -9,9 +9,9 @@
 
 var utils = require('./utils');
 
-module.exports = function(options) {
+module.exports = function(options, types) {
   return function fn(app) {
-    if (this.isRegistered('base-options')) return;
+    if (!utils.isValid(app, types)) return;
 
     var Options = utils.Options;
     var define = utils.define;
