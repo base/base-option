@@ -11,7 +11,7 @@ var utils = require('./utils');
 
 module.exports = function(options) {
   return function fn(app) {
-    if (!utils.isValid(app)) return;
+    if (!utils.isValid(app, 'base-option', '*')) return;
 
     var Options = utils.Options;
     var define = utils.define;
