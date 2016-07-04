@@ -11,6 +11,8 @@
   "license": "MIT",
   "files": [
     "index.js",
+    "LICENSE",
+    "README.md",
     "utils.js"
   ],
   "main": "index.js",
