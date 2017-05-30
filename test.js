@@ -38,13 +38,13 @@ describe('option', function() {
       app = new Base();
       app.use(plugins());
       app.use(options());
-      assert(app.fns.length === 1);
+      assert.equal(app.fns.length, 1);
     });
 
     it('should pass the plugin to "run" when {run:false} is defined', function() {
       app.use(plugins());
       app.use(options({run: false}));
-      assert(app.fns.length === 0);
+      assert.equal(app.fns.length, 0);
     });
 
     it('should not overwrite existing options', function() {
@@ -64,6 +64,27 @@ describe('option', function() {
       app.option({c: 'd'});
       var c = app.option('c');
       assert.equal(c, 'd');
+    });
+
+    it('should set multiple values', function() {
+      app.option({a: 'b'});
+      app.option({c: 'd'});
+      assert.equal(app.options.a, 'b');
+      assert.equal(app.options.c, 'd');
+    });
+
+    it('should set multiple values using key-value', function() {
+      app.option('a', 'b');
+      app.option('c', 'd');
+      assert.equal(app.options.a, 'b');
+      assert.equal(app.options.c, 'd');
+    });
+
+    it('should set multiple nested values using dot-notation', function() {
+      app.option('a.b', 'c');
+      app.option('a.c', 'd');
+      assert.equal(app.options.a.b, 'c');
+      assert.equal(app.options.a.c, 'd');
     });
 
     it('should get options', function() {
@@ -100,28 +121,6 @@ describe('option', function() {
       assert.deepEqual(app.option('a'), {b: {c: 'd'}});
       assert.deepEqual(app.option('a.b'), {c: 'd'});
       assert.deepEqual(app.option('a.b.c'), 'd');
-    });
-
-    it('should throw an error when key is null', function(cb) {
-      try {
-        app.option(null);
-        cb(new Error('expected an error'));
-      } catch (err) {
-        assert(err);
-        assert(err.message === 'expected option to be a string, object or array');
-        cb();
-      }
-    });
-
-    it('should throw an error when key is not a string or object', function(cb) {
-      try {
-        app.option(9);
-        cb(new Error('expected an error'));
-      } catch (err) {
-        assert(err);
-        assert(err.message === 'expected option to be a string, object or array');
-        cb();
-      }
     });
   });
 
