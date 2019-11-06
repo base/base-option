@@ -32,7 +32,7 @@
     "lazy-cache": "^2.0.2",
     "mixin-deep": "^1.2.0",
     "option-cache": "^4.0.0",
-    "set-value": "^1.0.0"
+    "set-value": "^3.0.1"
   },
   "devDependencies": {
     "base": "^0.13.0",
